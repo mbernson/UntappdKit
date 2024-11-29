@@ -2,7 +2,7 @@
 
 A client for the [Untappd](https://untappd.com/) API, written in Swift.
 
-It was created during the Q42 hackathon w00tcamp for the [Uncheckd app](https://uncheckd.com/). Check it out!
+It was created during the Q42 hackathon [w00tcamp](https://w00t.camp/) for the [Uncheckd app](https://uncheckd.com/). Check it out!
 
 ## Features
 
@@ -47,8 +47,10 @@ The offset and limit, combined with the `response.pagination` property may be us
 ```swift
 func fetchUserBeers() async throws {
     let untappdClient = UntappdClient()
-    let response: UserBeersResponse = try await untappdClient.userBeers(offset: 0, limit: 50)
-    print("User has \(response.totalCount) total beers checked in")
+    // Optionally set a delegate here to provide the user's access token to Untappd:
+    // untappdClient.delegate = self
+    let response: UserBeersResponse = try await untappdClient.userBeers(username: "Fubaruba", offset: 0, limit: 50)
+    print("Bram has \(response.totalCount) total beers checked in")
     for beerItem in response.beers.items {
         print("\(beerItem.beer.beerName) from \(beerItem.brewery.breweryName)")
         print("has \(beerItem.beer.beerAbv)% ABV")
@@ -108,4 +110,4 @@ I used [QuickType](https://quicktype.io) to quickly reverse-engineer the codable
 
 ## License
 
-MIT licensed, see [LICENSE.md].
+MIT licensed, see [LICENSE.md](#MIT-1-ov-file).
